@@ -1,3 +1,9 @@
+
+
+
+https://github.com/user-attachments/assets/3d6873eb-0ba6-426f-92f4-f126a273387a
+
+
 # Learning Management System (LMS)
 
 A full-stack Learning Management System built with the MERN stack (MongoDB, Express.js, React, Node.js). The platform enables educators to manage courses and students to browse, enroll in, and track their learning progress.
@@ -54,10 +60,4 @@ LMS/
    npm install
    cd ../server
    npm install
-
-
-
-
-
-
 
