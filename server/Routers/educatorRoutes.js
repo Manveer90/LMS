@@ -11,5 +11,5 @@ const educatorRouter = express.Router()
   educatorRouter.post('/add-course' , upload.single('image') , protectEducator ,addCourse)
   educatorRouter.get('/courses' , protectEducator , getEducatorCourses)
    educatorRouter.get('/dashboard' , protectEducator , educatorDashboardData)
-     educatorRouter.get('/dashboard-students' , protectEducator , getEnrolledStudentsData)
+     educatorRouter.get('/enrolled-students' , protectEducator , getEnrolledStudentsData)
   export default educatorRouter

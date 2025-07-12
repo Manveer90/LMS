@@ -1,9 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import uniqid from "uniqid";
 import Quill from "quill";
 import { assets } from "../../assets/assets";
+import { AppContext } from "../../Context/AppContext";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const AddCourses = () => {
+
+  const {backendUrl , getToken } = useContext(AppContext)
   const quillRef = useRef(null);
   const editorRef = useRef(null);
 
@@ -14,6 +19,7 @@ const AddCourses = () => {
   const [chapters, setChapters] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [currentChapterId, setCurrentChapterId] = useState(null);
+  const [isPublished, setIsPublished] = useState(false);
 
   const [lectureDetails, setLectureDetails] = useState({
     lectureTitle: "",
@@ -88,8 +94,42 @@ const AddCourses = () => {
   }
 
 const handleSubmit = async (e) => {
-  e.preventDefault();
-}
+  try {
+     e.preventDefault();
+     if (!image) {
+      toast.error('Thumbnail Not Selected')
+     }
+
+     const courseData = {
+      courseTitle,
+      courseDescription: quillRef.current.root.innerHTML,
+      coursePrice:Number(coursePrice),
+      discount:Number(discount),
+      courseContent: chapters,
+      isPublished,
+     }
+
+     const formData = new FormData()
+     formData.append('courseData', JSON.stringify(courseData))
+     formData.append('image', image)
+
+     const token = await getToken()
+      const {data} = await axios.post(backendUrl + '/api/educator/add-course' , formData , {headers: {Authorization: `Bearer ${token}`}})
+
+    if (data.success) {
+        toast.success(data.message)
+        setCourseTitle('')
+        setCoursePrice(0)
+        setDiscount(0)
+        setImage(null)
+        quillRef.current.root.innerHTML = ""
+      }else{
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
 
   useEffect(() => {
     // initae Quill only onceee !
@@ -336,6 +376,15 @@ const handleSubmit = async (e) => {
             </div>
           )}
         </div>
+        <div className="flex items-center gap-2">
+  <input
+    type="checkbox"
+    checked={isPublished}
+    onChange={(e) => setIsPublished(e.target.checked)}
+    className="scale-125"
+  />
+  <label>Publish this course</label>
+</div>
         <button
           type="submit"
           className="bg-black text-white w-max py-2.5 px-8 rounded my-4"

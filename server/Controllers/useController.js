@@ -81,7 +81,7 @@ export const purchaseCourse = async (req, res) => {
     ];
 
     const session = await stripeInstance.checkout.sessions.create({
-      success_url: `${origin}/loading/my-enrollments`,
+      success_url: `${origin}/my-enrollments`,
       cancel_url: `${origin}/`,
       line_items: line_items,
       mode: "payment",
@@ -149,8 +149,8 @@ export const addUserRating  = async (req, res) => {
     const { userId } = req.auth();
     const { courseId, rating } = req.body;
 
-    if (!courseId || !userId || rating || rating < 1 || rating > 5) {
-        return res.json({ success: false, message: 'Invalid Details' });
+if (!courseId || !userId || typeof rating !== 'number' || rating < 1 || rating > 5) {
+    return res.json({ success: false, message: 'Invalid Details' });
     }
   try {
     
