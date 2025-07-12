@@ -15,7 +15,7 @@ const Dashboard = () => {
     try {
       const token = await getToken()
       const {data}= await axios.get(backendUrl +'/api/educator/dashboard',{headers:{Authorization:`Bearer ${token}`}})
-console.log(data);
+       //console.log(data);
       if(data.success){
   setDashboardData(data.dashboardData)
 
@@ -31,7 +31,7 @@ else{
   // console.log(dashboardData);
 
   useEffect(()=>{
-    console.log("isEducator:", isEducator)
+   // console.log("isEducator:", isEducator)
     if(isEducator){
     fetchDashboardData()
     }

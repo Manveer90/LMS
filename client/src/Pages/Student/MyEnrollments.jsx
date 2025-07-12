@@ -24,7 +24,7 @@ const MyEnrollments = () => {
       })
      ) 
      setProgressArray(tempProgressArray)
-console.log(enrolledCourses)
+     //  console.log(enrolledCourses)
     } catch (error) {
       toast.error(error.message)
     }
@@ -33,14 +33,14 @@ console.log(enrolledCourses)
   useEffect(()=> {
     if(userData){
       fetchUserEnrolledCourses()
-      console.log(userData)
+    //  console.log(userData)
     }
   } , [userData])  
 
    useEffect(()=> {
     if(enrolledCourses?.length > 0){
       getCourseProgress()
-      console.log(enrolledCourses)
+    //  console.log(enrolledCourses)
     }
   } , [enrolledCourses])  
   
