@@ -35,8 +35,10 @@ A full-stack Learning Management System built with the MERN stack (MongoDB, Expr
 ## 📁 Project Structure
 
 LMS/
-- ── client/ # React frontend
-- ── server/ # Node.js backend
+- ── client/
+   React (frontend)
+- ── server/
+   Node.js (backend)
 
   
 ## 🚀 Getting Started
