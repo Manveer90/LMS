@@ -6,7 +6,7 @@ import Loading from '../../Components/Student/Loading'
 import { assets } from '../../assets/assets'
 import humanizeDuration from 'humanize-duration'
 import Footer from './../../Components/Student/Footer';
-import Youtube from 'react-youtube'
+import YouTube from 'react-youtube'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
@@ -82,8 +82,16 @@ else{
 } else {
   setAllreadyEnrolled(false);
 }
-
   }, [userData,courseData]);
+
+ // my video funtion
+
+  const extractYouTubeVideoId = (url) => {
+    const regex = /(?:v=|\/)([a-zA-Z0-9_-]{11})(?:[&?]|$)/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+  };
+
   return courseData ? (
     <>
       <div
@@ -228,8 +236,10 @@ else{
         <div className="max-w-[424px] z-10   rounded-t md:rounded-none overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.3)] bg-white min-w-[300px] sm:min-w-[420px]">
           {
               
-                playerData?<Youtube videoId={playerData.videoId} opts={{playerVars:{autoplay:1}}}
-                iframeClassName="w-full aspect-video"/>:<img src={courseData.courseThumbnail} alt="" />
+                playerData?<YouTube
+                videoId={extractYouTubeVideoId(playerData.lectureUrl)}
+                iframeClassName="w-full aspect-video"
+              />:<img src={courseData.courseThumbnail} alt="" />
               }
           
           <div className="p-5">
