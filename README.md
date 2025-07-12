@@ -51,14 +51,42 @@ LMS/
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/lms.git
+   git clone https://github.com/Manveer90/lms.git
    cd lms
 
 2. **Install dependencies for both client and server:**   
 
-  ```bash
-   cd client
-   npm install
-   cd ../server
-   npm install
+    ```bash
+    cd client
+    npm install
+    cd ../server
+    npm install
+
+3. **Set up environment variables:**
+
+- Create .env files in both /client and /server with appropriate values (e.g., MongoDB URI, JWT secrets, API base URLs).
+
+4. **Run the development servers:**
+
+- For the frontend:
+  
+     ```bash
+      cd client
+      npm run dev
+     
+- For the backend:
+
+     ```bash
+      cd server
+      npm run dev
+
+## 🌐 Deployment Guide
+You can deploy the frontend to Vercel and backend to Vercel
+
+### Example Deployment Strategy:
+- Frontend (Vercel): Connect GitHub repo, auto-deploy client/
+- Backend (Vercel): Create web service from GitHub, set environment variables, use server.js as entry point
+
+
+
 
